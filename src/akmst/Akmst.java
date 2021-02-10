@@ -17,8 +17,9 @@ public class Akmst {
     public static void main(String[] args) {
         System.out.println("Bienvenue sur l'application Akmst");
         System.out.println("C'est la zone en personne");
+        System.out.println("C'est la zone en personne");
         System.out.println("Salut premier test");
-        System.out.println("Salut deuxième test");
+        System.out.println("Salut deuxième test");        
     }
     
 }
