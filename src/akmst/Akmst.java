@@ -5,6 +5,8 @@
  */
 package akmst;
 
+import controller.MainController;
+
 /**
  *
  * @author anthony
@@ -15,13 +17,10 @@ public class Akmst {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Bienvenue sur l'application Akmst");
-        System.out.println("C'est la zone en personne");
-        System.out.println("C'est la zone en personne");
-        System.out.println("Salut premier test");
-        System.out.println("Salut deuxième test");
-        System.out.println("Askip ca marche comme ca ?");
         
+        MainController mainController = new MainController();
+        
+        mainController.displayLoginView();
     }
     
 }
