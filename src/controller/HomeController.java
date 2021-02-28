@@ -22,7 +22,6 @@ public class HomeController {
     }
     
     public void displayHomeView(){
-        this.homeView.setEnabled(true);
         this.homeView.setVisible(true);
     }    
 }

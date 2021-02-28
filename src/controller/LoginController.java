@@ -25,12 +25,10 @@ public class LoginController implements ActionListener {
     }
     
     public void displayLoginView(){
-        this.loginView.setEnabled(true);
         this.loginView.setVisible(true);
     }
     
     public void undisplayLoginView(){
-        this.loginView.setEnabled(false);
         this.loginView.setVisible(false);
     }
 

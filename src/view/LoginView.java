@@ -5,8 +5,6 @@
  */
 package view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 /**
@@ -25,8 +23,6 @@ public class LoginView extends javax.swing.JFrame {
     public JButton getjButton1() {
         return jButton1;
     }
-
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
