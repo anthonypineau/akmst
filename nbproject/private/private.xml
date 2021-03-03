@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/anthony/Bureau/akmst/src/view/HomeView.java</file>
+            <file>file:/home/anthony/Bureau/akmst/src/controller/LoginController.java</file>
             <file>file:/home/anthony/Bureau/akmst/src/akmst/Akmst.java</file>
             <file>file:/home/anthony/Bureau/akmst/src/controller/MainController.java</file>
-            <file>file:/home/anthony/Bureau/akmst/src/controller/GenericController.java</file>
+            <file>file:/home/anthony/Bureau/akmst/src/controller/HomeController.java</file>
+            <file>file:/home/anthony/Bureau/akmst/src/view/LoginView.java</file>
         </group>
     </open-files>
 </project-private>

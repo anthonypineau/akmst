@@ -20,7 +20,7 @@ public class Akmst {
         
         MainController mainController = new MainController();
         
-        mainController.displayLoginView();
+        mainController.displayLoginView();        
     }
     
 }
