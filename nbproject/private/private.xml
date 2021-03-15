@@ -5,10 +5,13 @@
         <group>
             <file>file:/home/anthony/Bureau/akmst/src/view/HomeView.java</file>
             <file>file:/home/anthony/Bureau/akmst/src/controller/LoginController.java</file>
+            <file>file:/home/anthony/Bureau/akmst/src/model/work/User.java</file>
             <file>file:/home/anthony/Bureau/akmst/src/akmst/Akmst.java</file>
             <file>file:/home/anthony/Bureau/akmst/src/controller/MainController.java</file>
+            <file>file:/home/anthony/Bureau/akmst/src/akmst/sql/akmst.sql</file>
             <file>file:/home/anthony/Bureau/akmst/src/controller/HomeController.java</file>
             <file>file:/home/anthony/Bureau/akmst/src/view/LoginView.java</file>
+            <file>file:/home/anthony/Bureau/akmst/src/utils/PasswordEncryption.java</file>
         </group>
     </open-files>
 </project-private>
