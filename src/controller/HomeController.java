@@ -32,7 +32,7 @@ public class HomeController {
     
     public void displayHomeView(){
         this.homeView.setVisible(true);
-        this.faitUnGraphLa();
+        this.faitUnGraphPie();
     }    
     
      public void faitUnGraphLa(){

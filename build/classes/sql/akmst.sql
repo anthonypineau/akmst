@@ -12,4 +12,3 @@ create table Customer
 name varchar(45) not null,
 constraint pk_Item_classes primary key(id))
 ENGINE=INNODB;
-

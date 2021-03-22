@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package akmst;
+
 
 import controller.MainController;
+import java.sql.SQLException;
+import model.dao.Jdbc;
+import model.dao.UserDAO;
 
 /**
  *
@@ -16,11 +19,13 @@ public class Akmst {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         
         MainController mainController = new MainController();
         
-        mainController.displayLoginView();        
+        mainController.displayLoginView();
+        
+        //System.out.print(UserDAO.getOneById(1).toString());
     }
     
 }

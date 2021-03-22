@@ -5,11 +5,12 @@
  */
 package view;
 
+import java.awt.Color;
 import javax.swing.JButton;
 
 /**
  *
- * @author anthony
+ * @author Anthony
  */
 public class LoginView extends javax.swing.JFrame {
 
@@ -18,10 +19,15 @@ public class LoginView extends javax.swing.JFrame {
      */
     public LoginView() {
         initComponents();
+        this.getContentPane().setBackground(Color.WHITE);
     }
 
-    public JButton getjButton1() {
-        return jButton1;
+    public JButton getJButtonSignIn(){
+        return this.jButtonSignIn;
+    }
+    
+    public JButton getJButtonSignUp(){
+        return this.jButtonSignUp;
     }
     
     /**
@@ -33,45 +39,59 @@ public class LoginView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonSignIn = new javax.swing.JButton();
+        jButtonSignUp = new javax.swing.JButton();
+        jLabelLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("AKMST");
+        setAutoRequestFocus(false);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
 
-        jLabel1.setText("Login");
+        jButtonSignIn.setBackground(new java.awt.Color(116, 147, 191));
+        jButtonSignIn.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonSignIn.setText("SignIn");
 
-        jButton1.setText("Display home view");
+        jButtonSignUp.setBackground(new java.awt.Color(116, 147, 191));
+        jButtonSignUp.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonSignUp.setText("SignUp");
+
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Logo_AKMST_50smaller.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(jButton1)))
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabelLogo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jButtonSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addComponent(jLabel1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelLogo)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButtonSignIn;
+    private javax.swing.JButton jButtonSignUp;
+    private javax.swing.JLabel jLabelLogo;
     // End of variables declaration//GEN-END:variables
-
 }

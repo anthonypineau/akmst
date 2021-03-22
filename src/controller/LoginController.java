@@ -8,6 +8,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import view.LoginView;
+import view.SignInDialog;
+import view.SignUpDialog;
 
 /**
  *
@@ -21,7 +23,8 @@ public class LoginController implements ActionListener {
     public LoginController(MainController mainController){
         this.mainController = mainController;
         this.loginView = new LoginView();
-        this.loginView.getjButton1().addActionListener(this);
+        this.loginView.getJButtonSignIn().addActionListener(this);
+        this.loginView.getJButtonSignUp().addActionListener(this);
     }
     
     public void displayLoginView(){
@@ -34,9 +37,13 @@ public class LoginController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if(event.getSource().equals(this.loginView.getjButton1())){
-            this.mainController.displayHomeView();
-            System.out.println("listener actif");
+        if(event.getSource().equals(this.loginView.getJButtonSignIn())){
+            SignInDialog jD = new SignInDialog(this.loginView,true);
+            jD.setVisible(true);
+            //this.mainController.displayHomeView();
+        }else if(event.getSource().equals(this.loginView.getJButtonSignUp())){
+            SignUpDialog jD = new SignUpDialog(this.loginView,true);
+            jD.setVisible(true);
         }
    }
 }
