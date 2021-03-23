@@ -14,27 +14,28 @@ import java.sql.SQLException;
  * @author anthony
  */
 public class Jdbc {
-    private static String url = "jdbc:mysql://192.168.122.205/akmst";
-    private static String utilBD = "anthony";
-    private static String mdpBD = "anthony";
-    private static Connection cnx; // java.sql.Connection
+    private static String url = "jdbc:mysql://localhost/akmst";
+    private static String user = "root";
+    private static String password = "";
+    private static Connection cnx;
     
-    /**Retourner une connexion, la créer si elle n'existe pas...
+    /**Return connection, create it if it does not exist...
      * @return 
      * @throws java.sql.SQLException */
-    public static Connection connecter() throws SQLException {
+    public static Connection connect() throws SQLException {
     if (cnx == null) {
-        cnx = DriverManager.getConnection(url, utilBD, mdpBD);
+        cnx = DriverManager.getConnection(url, user, password);
     }
     return cnx;
     }
-    /** Pour changer les paramètres de connexion par défaut
+    
+    /** To changer default connection settings 
      * @param url
-     * @param login
-     * @param mdp */
-    public static void initialiser(String url, String login, String mdp){
+     * @param user
+     * @param password */
+    public static void initialize(String url, String user, String password){
     Jdbc.url = url;
-    utilBD = login;
-    mdpBD = mdp;
+    Jdbc.user = user;
+    Jdbc.password = password;
     }
 }

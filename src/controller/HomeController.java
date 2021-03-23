@@ -7,6 +7,7 @@ package controller;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import model.work.User;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -30,8 +31,9 @@ public class HomeController {
         this.homeView = new HomeView();
     }
     
-    public void displayHomeView(){
+    public void displayHomeView(User user){
         this.homeView.setVisible(true);
+        this.homeView.getJLabelUser().setText(user.toString());
         this.faitUnGraphPie();
     }    
     

@@ -5,6 +5,8 @@
  */
 package controller;
 
+import model.work.User;
+
 /**
  *
  * @author anthony
@@ -19,9 +21,9 @@ public class MainController {
         this.homeController = new HomeController(this);
     }
     
-    public void displayHomeView(){
+    public void displayHomeView(User user){
         this.loginController.undisplayLoginView();
-        this.homeController.displayHomeView();
+        this.homeController.displayHomeView(user);
     }
     
     public void displayLoginView(){

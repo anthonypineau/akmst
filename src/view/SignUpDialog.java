@@ -6,6 +6,8 @@
 package view;
 
 import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 /**
  *
@@ -15,11 +17,33 @@ public class SignUpDialog extends javax.swing.JDialog {
 
     /**
      * Creates new form SignUpDialog
+     * @param parent
+     * @param modal
      */
     public SignUpDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
+    }
+    
+    public JTextField getJTextFieldEmail(){
+        return this.jTextFieldEmail;
+    }
+    
+    public JTextField getJTextFieldName(){
+        return this.jTextFieldName;
+    }
+    
+    public JTextField getJTextFieldPassword(){
+        return this.jTextFieldPassword;
+    }
+
+    public JTextField getJTextFieldStatus(){
+        return this.jTextFieldStatus;
+    }
+    
+    public JButton getJButtonSignUp(){
+        return this.jButtonSignUp;
     }
 
     /**

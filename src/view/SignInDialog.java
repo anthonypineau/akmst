@@ -6,6 +6,8 @@
 package view;
 
 import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 /**
  *
@@ -22,6 +24,18 @@ public class SignInDialog extends javax.swing.JDialog {
         this.getContentPane().setBackground(Color.WHITE);
     }
 
+    public JTextField getJTextFieldEmail(){
+        return this.jTextFieldEmail;
+    }
+    
+    public JTextField getJTextFieldPassword(){
+        return this.jTextFieldPassword;
+    }
+    
+    public JButton getJButtonSignIn(){
+        return this.jButtonSignIn;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

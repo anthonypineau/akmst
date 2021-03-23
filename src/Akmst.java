@@ -4,12 +4,7 @@
  * and open the template in the editor.
  */
 
-
 import controller.MainController;
-import java.sql.SQLException;
-import model.dao.Jdbc;
-import model.dao.UserDAO;
-
 /**
  *
  * @author anthony
@@ -19,13 +14,8 @@ public class Akmst {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SQLException {
-        
+    public static void main(String[] args) {
         MainController mainController = new MainController();
-        
         mainController.displayLoginView();
-        
-        //System.out.print(UserDAO.getOneById(1).toString());
     }
-    
 }
