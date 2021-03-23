@@ -33,8 +33,8 @@
                       <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jTextFieldEmail" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldPassword" alignment="1" max="32767" attributes="0"/>
                           <Component id="jButtonSignIn" alignment="1" pref="100" max="32767" attributes="0"/>
+                          <Component id="jPasswordField" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -50,7 +50,7 @@
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="jTextFieldEmail" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTextFieldPassword" min="-2" max="-2" attributes="0"/>
+              <Component id="jPasswordField" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButtonSignIn" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="42" max="32767" attributes="0"/>
@@ -73,14 +73,10 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Email"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldPassword">
-      <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="bf" green="93" red="74" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Password"/>
-      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldEmailFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldEmailFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSignIn">
       <Properties>
@@ -92,6 +88,15 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Sign In"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="jPasswordField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="password"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jPasswordFieldFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jPasswordFieldFocusLost"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -7,7 +7,11 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.dao.UserDAO;
 import model.work.User;
@@ -57,18 +61,22 @@ public class LoginController implements ActionListener {
         }else if(event.getSource().equals(this.signInDialog.getJButtonSignIn())){
             try{
                 User user = UserDAO.getOneById(UserDAO.verifiedUser(this.signInDialog.getJTextFieldEmail().getText()
-                        , this.signInDialog.getJTextFieldPassword().getText())); 
+                        , this.signInDialog.getJPasswordField().getText())); 
                 this.signInDialog.dispose();
                 this.mainController.displayHomeView(user);
             }catch(SQLException e){
                 System.out.print(e.getMessage());
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }else if(event.getSource().equals(this.signUpDialog.getJButtonSignUp())){
             try{
                 int response = UserDAO.insert(new User(0, this.signUpDialog.getJTextFieldName().getText(), 
                     this.signUpDialog.getJTextFieldStatus().getText(), 
-                    this.signUpDialog.getJTextFieldEmail().getText()), this.signUpDialog.getJTextFieldPassword().getText());
+                    this.signUpDialog.getJTextFieldEmail().getText()), this.signUpDialog.getJPasswordField().getText());
                 if(response !=0){
                     this.signUpDialog.dispose();
                     this.signInDialog.setVisible(true);
@@ -77,6 +85,10 @@ public class LoginController implements ActionListener {
                 }
             }catch(SQLException e){
                 System.out.print(e.getMessage());
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
    }

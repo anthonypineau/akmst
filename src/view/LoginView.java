@@ -20,6 +20,7 @@ public class LoginView extends javax.swing.JFrame {
     public LoginView() {
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
+        setLocationRelativeTo(null);
     }
 
     public JButton getJButtonSignIn(){
