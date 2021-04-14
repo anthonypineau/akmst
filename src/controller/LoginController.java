@@ -71,7 +71,6 @@ public class LoginController implements ActionListener {
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         }else if(event.getSource().equals(this.signUpDialog.getJButtonSignUp())){
             try{
                 int response = UserDAO.insert(new User(0, this.signUpDialog.getJTextFieldName().getText(), 

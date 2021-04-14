@@ -5,6 +5,7 @@
  */
 
 import controller.MainController;
+import model.work.User;
 /**
  *
  * @author anthony
@@ -16,6 +17,7 @@ public class Akmst {
      */
     public static void main(String[] args) {
         MainController mainController = new MainController();
-        mainController.displayLoginView();
+        //mainController.displayLoginView();
+        mainController.displayHomeView(new User(1, "anthony", "admin", "anthony"));
     }
 }

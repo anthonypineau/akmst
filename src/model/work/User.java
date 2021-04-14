@@ -32,7 +32,7 @@ public class User {
      */
     @Override
     public String toString() {
-        return ("User{id: " + this.getId() + "\tname: " + this.getName() + "\tstatus: " + this.getStatus() + "\temail: " + this.getEmail() + "}");
+        return ("User{id: " + this.getId() + ", name: " + this.getName() + ", status: " + this.getStatus() + ", email: " + this.getEmail() + "}");
     }
     
     //Getters and setters
