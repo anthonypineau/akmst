@@ -10,7 +10,12 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -185,8 +190,33 @@ public class HomeController implements ActionListener {
             modelCustomersTable.addRow(customerToTableRow(c));
         }
         
+        JPanel customerPanel = new JPanel();
+        String[] items = { "name", "name desc", "something else" };
+        JComboBox sortSelector = new JComboBox(items);
+        sortSelector.addActionListener (new ActionListener () {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(sortSelector.getSelectedIndex());
+                switch(sortSelector.getSelectedIndex()){
+                    case 0 :
+                        System.out.println("asc");
+                        Collections.sort(customers, new customerByName());
+                        
+                        break;
+                    case 1 :
+                        System.out.println("desc");
+                        Collections.sort(customers, new customerByNamedesc());
+                        break;
+                }
+                displayCustomersTable();
+            }
+        });
+        customerPanel.add(new JLabel("Sort by :"));
+        customerPanel.add(sortSelector);
+        customerPanel.add(new JScrollPane(jTableCustomers));
+        
         this.homeView.getjPanelContent().removeAll();
-        this.homeView.getjPanelContent().add(new JScrollPane(jTableCustomers));
+        //this.homeView.getjPanelContent().add(new JScrollPane(jTableCustomers));
+        this.homeView.getjPanelContent().add(customerPanel);
         this.homeView.getjPanelContent().validate();
     }
     
@@ -208,4 +238,18 @@ public class HomeController implements ActionListener {
     
     
     
+}
+
+
+class customerByName implements Comparator<Customer>{
+    
+    public int compare(Customer a, Customer b){
+        return a.getName().compareTo(b.getName());
+    }
+}
+class customerByNamedesc implements Comparator<Customer>{
+    
+    public int compare(Customer a, Customer b){
+        return -a.getName().compareTo(b.getName());
+    }
 }
