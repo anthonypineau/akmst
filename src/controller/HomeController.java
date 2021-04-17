@@ -11,6 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +29,8 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import utils.comparators.customer.NameDescSorter;
+import utils.comparators.customer.NameSorter;
 import view.HomeView;
 import view.dialogs.AddNewCustomerDialog;
 import view.dialogs.AddNewInvoiceDialog;
@@ -47,7 +53,14 @@ public class HomeController implements ActionListener {
     private final ArrayList<Invoice> invoices = new ArrayList<>();
     private final ArrayList<Quotation> quotations = new ArrayList<>();
     
-    
+    JPanel customerPanel = new JPanel();
+        
+    JComboBox jComboBoxSortCustomersTable = new JComboBox();
+    DefaultComboBoxModel modelComboBoxSortCustomersTable = new DefaultComboBoxModel();
+        
+    JTable jTableCustomers = new JTable();
+    DefaultTableModel modelCustomersTable = new DefaultTableModel();
+        
     private int statusAddButton=0;
     
     public HomeController(MainController mainController){
@@ -64,9 +77,23 @@ public class HomeController implements ActionListener {
         this.addNewQuotationDialog = new AddNewQuotationDialog(this.homeView,true);       
         
         this.addNewCustomerDialog.getjButtonAddNewCustomer().addActionListener(this);
-        
-        //this.addNewCustomerDialog.getJButtonSignUp().addActionListener(this);
                 
+        jComboBoxSortCustomersTable.setModel(modelComboBoxSortCustomersTable);
+                
+        String[] items = { "name", "name desc" };
+        
+        for(String item : items){
+            modelComboBoxSortCustomersTable.addElement(item);
+        }
+                
+        jComboBoxSortCustomersTable.addActionListener(this);
+        
+        jTableCustomers.setModel(modelCustomersTable);
+        
+        String[] columnsTitles = {"Customer number", "Name", "E-mail", "Phone number", "First order date", "Shopping cart", "Tag"};
+        
+        modelCustomersTable.setColumnIdentifiers(columnsTitles);        
+        
         addData();
     }
     
@@ -210,24 +237,35 @@ public class HomeController implements ActionListener {
             this.homeView.getjButtonAdd().setVisible(true);
         }else if(e.getSource().equals(this.addNewCustomerDialog.getjButtonAddNewCustomer())){
             
+        }else if(e.getSource().equals(this.jComboBoxSortCustomersTable)){
+            switch(modelComboBoxSortCustomersTable.getSelectedItem().toString()){
+                case "name" :
+                    customers.sort(new NameSorter());
+                    break;
+                case "name desc" :
+                    customers.sort(new NameDescSorter());
+                    break;
+            }
+            displayCustomersTable();
         }
     }
-    
+
     private void displayCustomersTable(){
-        JTable jTableCustomers = new JTable();
-        DefaultTableModel modelCustomersTable = new DefaultTableModel();
-        jTableCustomers.setModel(modelCustomersTable);
-        
-        String[] columnsTitles = {"Customer number", "Name", "E-mail", "Phone number", "First order date", "Shopping cart", "Tag"};
-        
-        modelCustomersTable.setColumnIdentifiers(columnsTitles);
+        for(int i=this.modelCustomersTable.getRowCount()-1;i>=0;i--){
+            this.modelCustomersTable.removeRow(i);
+        }
         
         for(Customer c : customers){
             modelCustomersTable.addRow(customerToTableRow(c));
         }
         
+        customerPanel.removeAll();
+        customerPanel.add(new JLabel("Sort by :"));
+        customerPanel.add(jComboBoxSortCustomersTable);
+        customerPanel.add(new JScrollPane(jTableCustomers));
+        
         this.homeView.getjPanelContent().removeAll();
-        this.homeView.getjPanelContent().add(new JScrollPane(jTableCustomers));
+        this.homeView.getjPanelContent().add(customerPanel);
         this.homeView.getjPanelContent().validate();
     }
     
@@ -299,7 +337,5 @@ public class HomeController implements ActionListener {
         
         return tableRow;
     }
-    
-    
-    
+     
 }

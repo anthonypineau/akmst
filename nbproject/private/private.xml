@@ -12,9 +12,15 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Anthony/Desktop/akmst/src/view/dialogs/AddNewCustomerDialog.java</file>
             <file>file:/C:/Users/Anthony/Desktop/akmst/src/controller/HomeController.java</file>
             <file>file:/C:/Users/Anthony/Desktop/akmst/src/view/dialogs/AddNewInvoiceDialog.java</file>
+=======
+            <file>file:/C:/Users/hugo/Desktop/akmst/src/model/work/Customer.java</file>
+            <file>file:/C:/Users/hugo/Desktop/akmst/src/controller/HomeController.java</file>
+            <file>file:/C:/Users/hugo/Desktop/akmst/src/view/HomeView.java</file>
+>>>>>>> 012ace847dda6c1774f5f2deb743777c7eb6b26e
         </group>
     </open-files>
 </project-private>
