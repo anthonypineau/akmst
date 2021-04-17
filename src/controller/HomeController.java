@@ -15,6 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.work.Customer;
+import model.work.Invoice;
+import model.work.Quotation;
 import model.work.User;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -25,6 +27,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import view.HomeView;
 import view.dialogs.AddNewCustomerDialog;
+import view.dialogs.AddNewInvoiceDialog;
+import view.dialogs.AddNewQuotationDialog;
 
 /**
  *
@@ -39,7 +43,10 @@ public class HomeController implements ActionListener {
     private AddNewInvoiceDialog addNewInvoiceDialog = null;
     private AddNewQuotationDialog addNewQuotationDialog = null;
     
-    private ArrayList<Customer> customers = new ArrayList<Customer>();
+    private final ArrayList<Customer> customers = new ArrayList<>();
+    private final ArrayList<Invoice> invoices = new ArrayList<>();
+    private final ArrayList<Quotation> quotations = new ArrayList<>();
+    
     
     private int statusAddButton=0;
     
@@ -53,11 +60,17 @@ public class HomeController implements ActionListener {
         this.homeView.getjButtonAdd().addActionListener(this);
         
         this.addNewCustomerDialog = new AddNewCustomerDialog(this.homeView,true);
-        //this.addNewInvoiceDialog = new AddNewInvoiceDialog(this.homeView,true);
-        //this.addNewQuotationDialog = new AddNewQuotationDialog(this.homeView,true);       
+        this.addNewInvoiceDialog = new AddNewInvoiceDialog(this.homeView,true);
+        this.addNewQuotationDialog = new AddNewQuotationDialog(this.homeView,true);       
+        
+        this.addNewCustomerDialog.getjButtonAddNewCustomer().addActionListener(this);
         
         //this.addNewCustomerDialog.getJButtonSignUp().addActionListener(this);
-        
+                
+        addData();
+    }
+    
+    private void addData(){
         Customer c1 = new Customer(1, "c1", "c1@c1.com", "0123456789", new Date(2021,04,10), "cart", "tag");
         Customer c2 = new Customer(2, "c2", "c2@c2.com", "0123456789", new Date(2021,04,10), "cart", "tag");
         Customer c3 = new Customer(3, "c3", "c3@c3.com", "0123456789", new Date(2021,04,10), "cart", "tag");
@@ -79,6 +92,28 @@ public class HomeController implements ActionListener {
         customers.add(c8);
         customers.add(c9);
         customers.add(c10);
+        
+        Invoice i1 = new Invoice(1, new Date(2021,04,10), 100);
+        Invoice i2 = new Invoice(2, new Date(2021,04,10), 100);
+        Invoice i3 = new Invoice(3, new Date(2021,04,10), 100);
+        Invoice i4 = new Invoice(4, new Date(2021,04,10), 100);
+        Invoice i5 = new Invoice(5, new Date(2021,04,10), 100);
+        invoices.add(i1);
+        invoices.add(i2);
+        invoices.add(i3);
+        invoices.add(i4);
+        invoices.add(i5);
+        
+        Quotation q1 = new Quotation(1, new Date(2021,04,10));
+        Quotation q2 = new Quotation(2, new Date(2021,04,10));
+        Quotation q3 = new Quotation(3, new Date(2021,04,10));
+        Quotation q4 = new Quotation(4, new Date(2021,04,10));
+        Quotation q5 = new Quotation(5, new Date(2021,04,10));
+        quotations.add(q1);
+        quotations.add(q2);
+        quotations.add(q3);
+        quotations.add(q4);
+        quotations.add(q5);
     }
     
     public void displayHomeView(User user){
@@ -120,7 +155,7 @@ public class HomeController implements ActionListener {
         this.homeView.getjPanelContent().add(chartPanel, BorderLayout.CENTER);
         this.homeView.getjPanelContent().validate();
     }
-        
+    
     public void displayLineGraph(){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.setValue(1,"","premier");
@@ -155,20 +190,26 @@ public class HomeController implements ActionListener {
                     System.out.println("add new customer");
                     break;
                 case 2:
+                    this.addNewQuotationDialog.setVisible(true);
                     System.out.println("add new quotation");
                     break;
                 case 3:
+                    this.addNewInvoiceDialog.setVisible(true);
                     System.out.println("add new invoice");
                     break;
             }
         }else if(e.getSource().equals(this.homeView.getjButtonQuotations())){
+            displayQuotationsTable();
             this.homeView.getjButtonAdd().setText("Add new quotation");
             statusAddButton=2;
             this.homeView.getjButtonAdd().setVisible(true);
         }else if(e.getSource().equals(this.homeView.getjButtonInvoices())){
+            displayInvoicesTable();
             this.homeView.getjButtonAdd().setText("Add new invoice");
             statusAddButton=3;
             this.homeView.getjButtonAdd().setVisible(true);
+        }else if(e.getSource().equals(this.addNewCustomerDialog.getjButtonAddNewCustomer())){
+            
         }
     }
     
@@ -190,6 +231,42 @@ public class HomeController implements ActionListener {
         this.homeView.getjPanelContent().validate();
     }
     
+    private void displayInvoicesTable(){
+        JTable jTableInvoices = new JTable();
+        DefaultTableModel modelInvoicesTable = new DefaultTableModel();
+        jTableInvoices.setModel(modelInvoicesTable);
+        
+        String[] columnsTitles = {"Invoice number", "Ordre date", "Total price"};
+        
+        modelInvoicesTable.setColumnIdentifiers(columnsTitles);
+        
+        for(Invoice i : invoices){
+            modelInvoicesTable.addRow(invoiceToTableRow(i));
+        }
+        
+        this.homeView.getjPanelContent().removeAll();
+        this.homeView.getjPanelContent().add(new JScrollPane(jTableInvoices));
+        this.homeView.getjPanelContent().validate();
+    }
+    
+    private void displayQuotationsTable(){
+        JTable jTableQuotations = new JTable();
+        DefaultTableModel modelQuotationsTable = new DefaultTableModel();
+        jTableQuotations.setModel(modelQuotationsTable);
+        
+        String[] columnsTitles = {"Invoice number", "Ordre date"};
+        
+        modelQuotationsTable.setColumnIdentifiers(columnsTitles);
+        
+        for(Quotation q : quotations){
+            modelQuotationsTable.addRow(quotationToTableRow(q));
+        }
+        
+        this.homeView.getjPanelContent().removeAll();
+        this.homeView.getjPanelContent().add(new JScrollPane(jTableQuotations));
+        this.homeView.getjPanelContent().validate();
+    }
+    
     private String[] customerToTableRow(Customer c){
         String[] tableRow = new String[7];
         
@@ -204,7 +281,24 @@ public class HomeController implements ActionListener {
         return tableRow;
     }
     
+    private String[] invoiceToTableRow(Invoice i){
+        String[] tableRow = new String[3];
+        
+        tableRow[0]=String.valueOf(i.getNumber());
+        tableRow[1]= i.getOrderDate().toString();
+        tableRow[2]= String.valueOf(i.getTotalPrice());
+        
+        return tableRow;
+    }
     
+    private String[] quotationToTableRow(Quotation q){
+        String[] tableRow = new String[2];
+        
+        tableRow[0]=String.valueOf(q.getNumber());
+        tableRow[1]= q.getOrderDate().toString();
+        
+        return tableRow;
+    }
     
     
     
