@@ -23,7 +23,7 @@ public class MainController {
     
     public void displayHomeView(User user){
         this.loginController.undisplayLoginView();
-        this.homeController.displayHomeView(user);
+        this.homeController.displayHomeView();
     }
     
     public void displayLoginView(){

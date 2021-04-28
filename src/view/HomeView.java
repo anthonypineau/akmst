@@ -6,7 +6,6 @@
 package view;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -22,36 +21,12 @@ public class HomeView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    public JButton getjButtonCustomers() {
-        return jButtonCustomers;
-    }
-
-    public JButton getjButtonInvoices() {
-        return jButtonInvoices;
-    }
-
-    public JButton getjButtonQuotations() {
-        return jButtonQuotations;
+    public JPanel getjPanelMenu() {
+        return jPanelMenu;
     }
     
-    public JButton getjButtonHome() {
-        return jButtonHome;
-    }
-
-    public JLabel getjLabel1() {
-        return jLabel1;
-    }
-
-    public JLabel getjLabelUser() {
-        return jLabelUser;
-    }
-
     public JPanel getjPanelContent() {
         return jPanelContent;
-    }
-
-    public JButton getjButtonAdd() {
-        return jButtonAdd;
     }
     
     /**
@@ -63,79 +38,43 @@ public class HomeView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanelContent = new javax.swing.JPanel();
-        jLabelUser = new javax.swing.JLabel();
-        jButtonHome = new javax.swing.JButton();
-        jButtonCustomers = new javax.swing.JButton();
-        jButtonAdd = new javax.swing.JButton();
-        jButtonQuotations = new javax.swing.JButton();
-        jButtonInvoices = new javax.swing.JButton();
+        jPanelMenu = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Home");
+        setPreferredSize(new java.awt.Dimension(1280, 720));
 
         jPanelContent.setLayout(new java.awt.BorderLayout());
 
-        jLabelUser.setText("jLabel2");
-
-        jButtonHome.setText("Home");
-
-        jButtonCustomers.setText("Customers");
-
-        jButtonAdd.setText("Add");
-
-        jButtonQuotations.setText("Quotations");
-
-        jButtonInvoices.setText("Invoices");
+        javax.swing.GroupLayout jPanelMenuLayout = new javax.swing.GroupLayout(jPanelMenu);
+        jPanelMenu.setLayout(jPanelMenuLayout);
+        jPanelMenuLayout.setHorizontalGroup(
+            jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanelMenuLayout.setVerticalGroup(
+            jPanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanelContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jButtonHome)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButtonCustomers)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonQuotations)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonInvoices)
-                        .addGap(0, 394, Short.MAX_VALUE)))
+                    .addComponent(jPanelContent, javax.swing.GroupLayout.DEFAULT_SIZE, 1260, Short.MAX_VALUE)
+                    .addComponent(jPanelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addComponent(jLabel1)
-                .addGap(71, 71, 71)
-                .addComponent(jLabelUser)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonAdd)
-                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabelUser))
-                    .addComponent(jButtonAdd))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonHome)
-                    .addComponent(jButtonCustomers)
-                    .addComponent(jButtonQuotations)
-                    .addComponent(jButtonInvoices))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(jPanelContent, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanelContent, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -143,13 +82,7 @@ public class HomeView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAdd;
-    private javax.swing.JButton jButtonCustomers;
-    private javax.swing.JButton jButtonHome;
-    private javax.swing.JButton jButtonInvoices;
-    private javax.swing.JButton jButtonQuotations;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabelUser;
     private javax.swing.JPanel jPanelContent;
+    private javax.swing.JPanel jPanelMenu;
     // End of variables declaration//GEN-END:variables
 }

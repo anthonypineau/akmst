@@ -13,16 +13,15 @@ import java.util.Date;
  */
 public class Invoice {
     private int number;
-    private Date orderDate;
-    private float totalPrice;
+    private String date;
+    private int totalPrice;
     
-    public Invoice(int number, Date orderDate, float totalPrice){
+    public Invoice(int number, String date, int totalPrice){
         this.number = number;
-        this.orderDate = orderDate;
+        this.date = date;
         this.totalPrice = totalPrice;
     }
-    
-    
+        
     //gettters and setters
 
     public int getNumber() {
@@ -33,19 +32,19 @@ public class Invoice {
         this.number = number;
     }
 
-    public Date getOrderDate() {
-        return orderDate;
+    public String getDate() {
+        return date;
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+    public void setOrderDate(String date) {
+        this.date = date;
     }
 
-    public float getTotalPrice() {
+    public int getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(float totalPrice) {
+    public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
 }

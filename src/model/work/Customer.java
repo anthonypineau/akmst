@@ -20,20 +20,18 @@ public class Customer {
     private String name;
     private String email;
     private String phoneNumber;
-    private Date firstOrderDate;
-    private String shoppingCart;
+    private String firstOrderDate;
     private String tag;
     
     private ArrayList<Invoice> invoices = new ArrayList<Invoice>();
     private ArrayList<Quotation> quotations = new ArrayList<Quotation>();
     
-    public Customer(int number, String name, String email, String phoneNumber, Date firstOrderDate, String shoppingCart, String tag){
+    public Customer(int number, String name, String email, String phoneNumber, String firstOrderDate, String tag){
         this.number = number;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.firstOrderDate = firstOrderDate;
-        this.shoppingCart = shoppingCart;
         this.tag = tag;
     }
     
@@ -71,20 +69,12 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public Date getFirstOrderDate() {
+    public String getFirstOrderDate() {
         return firstOrderDate;
     }
 
-    public void setFirstOrderDate(Date firstOrderDate) {
+    public void setFirstOrderDate(String firstOrderDate) {
         this.firstOrderDate = firstOrderDate;
-    }
-
-    public String getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(String shoppingCart) {
-        this.shoppingCart = shoppingCart;
     }
 
     public String getTag() {
@@ -94,5 +84,20 @@ public class Customer {
     public void setTag(String tag) {
         this.tag = tag;
     }
-    
+
+    public ArrayList<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(ArrayList<Invoice> invoices) {
+        this.invoices = invoices;
+    }
+
+    public ArrayList<Quotation> getQuotations() {
+        return quotations;
+    }
+
+    public void setQuotations(ArrayList<Quotation> quotations) {
+        this.quotations = quotations;
+    }
 }

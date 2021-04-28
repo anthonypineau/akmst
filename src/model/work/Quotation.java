@@ -13,11 +13,13 @@ import java.util.Date;
  */
 public class Quotation {
     private int number;
-    private Date orderDate;
+    private String date;
+    private int price;
     
-    public Quotation(int number, Date orderDate){
+    public Quotation(int number, String date, int price){
         this.number = number;
-        this.orderDate = orderDate;
+        this.date = date;
+        this.price = price;
     }
     
     //getters and setters
@@ -30,11 +32,20 @@ public class Quotation {
         this.number = number;
     }
 
-    public Date getOrderDate() {
-        return orderDate;
+    public String getDate() {
+        return date;
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+    public void setOrderDate(String date) {
+        this.date = date;
     }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+    
 }
