@@ -70,15 +70,16 @@ public class InvoiceDAO {
         return invoices;
     }
         
-    public static int insert(Invoice oneInvoice) throws SQLException {
+    public static int insert(Invoice oneInvoice, int customer) throws SQLException {
         int nb;
         Connection cnx = Jdbc.connect();
         String requete;
         PreparedStatement pstmt;
-        requete = "INSERT INTO invoices (date, totalPrice) VALUES (?, ?)";
+        requete = "INSERT INTO invoices (date, totalPrice, customer) VALUES (?, ?, ?)";
         pstmt = cnx.prepareStatement(requete);
         pstmt.setString(1, oneInvoice.getDate());
         pstmt.setInt(2, oneInvoice.getTotalPrice());
+        pstmt.setInt(3, customer);
         nb = pstmt.executeUpdate();
         return nb;
     }

@@ -70,15 +70,16 @@ public class QuotationDAO {
         return quotations;
     }
         
-    public static int insert(Quotation oneQuotation) throws SQLException {
+    public static int insert(Quotation oneQuotation, int customer) throws SQLException {
         int nb;
         Connection cnx = Jdbc.connect();
         String requete;
         PreparedStatement pstmt;
-        requete = "INSERT INTO quotations (date, price) VALUES (?, ?)";
+        requete = "INSERT INTO quotations (date, price, customer) VALUES (?, ?, ?)";
         pstmt = cnx.prepareStatement(requete);
         pstmt.setString(1, oneQuotation.getDate());
         pstmt.setInt(2, oneQuotation.getPrice());
+        pstmt.setInt(3, customer);
         nb = pstmt.executeUpdate();
         return nb;
     }

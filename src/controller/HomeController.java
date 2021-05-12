@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -64,18 +65,18 @@ public class HomeController implements ActionListener, MouseListener {
     
     private Customer selectedCustomer = null;
             
-    JComboBox jComboBoxSortCustomersTable = new JComboBox();
-    DefaultComboBoxModel modelComboBoxSortCustomersTable = new DefaultComboBoxModel();
+    private JComboBox jComboBoxSortCustomersTable = new JComboBox();
+    private DefaultComboBoxModel modelComboBoxSortCustomersTable = new DefaultComboBoxModel();
         
-    JTable jTable = new JTable();
-    DefaultTableModel modelTable = new DefaultTableModel();
+    private JTable jTable = new JTable();
+    private DefaultTableModel modelTable = new DefaultTableModel();
     
-    JTable jTableCustomers = new JTable();
-    DefaultTableModel modelTableCustomers = new DefaultTableModel();
+    private JTable jTableCustomers = new JTable();
+    private DefaultTableModel modelTableCustomers = new DefaultTableModel();
     
     private int statusAddButton=0;
     
-    public HomeController(MainController mainController){
+    public HomeController(MainController mainController) throws SQLException{
         this.mainController = mainController;
         this.homeView = new HomeView();
         
@@ -104,7 +105,12 @@ public class HomeController implements ActionListener, MouseListener {
         this.addNewQuotationDialog = new AddNewQuotationDialog(this.homeView,true);       
         
         this.addNewCustomerDialog.getjButtonAddNewCustomer().addActionListener(this);
-                
+        this.addNewInvoiceDialog.getjButtonAddNewInvoice().addActionListener(this);
+        this.addNewQuotationDialog.getjButtonAddNewQuotation().addActionListener(this);
+        
+        this.addNewInvoiceDialog.getjComboBoxCustomer().addActionListener(this);
+        this.addNewQuotationDialog.getjComboBoxCustomer().addActionListener(this);
+        
         jComboBoxSortCustomersTable.setModel(modelComboBoxSortCustomersTable);
                 
         String[] items = { "name", "name desc" };
@@ -243,7 +249,6 @@ public class HomeController implements ActionListener, MouseListener {
         this.homeView.getjPanelContent().validate();
     }
     
-    
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(this.jButtonCustomers)){
@@ -295,14 +300,37 @@ public class HomeController implements ActionListener, MouseListener {
                     break;
             }
         }else if(e.getSource().equals(this.addNewCustomerDialog.getjButtonAddNewCustomer())){
-            //this.addNewCustomerDialog;
-            //CustomerDAO.insert();
+            String name = this.addNewCustomerDialog.getjTextFieldName().getText();
+            String email = this.addNewCustomerDialog.getjTextFieldEmail().getText();
+            String phoneNumber = this.addNewCustomerDialog.getjTextFieldPhone().getText();
+            String firstOrderDate = this.addNewCustomerDialog.getjTextFieldDate().getText();
+            String tag = this.addNewCustomerDialog.getjTextFieldTag().getText();
+            Customer c = new Customer(0,name, email, phoneNumber, firstOrderDate, tag);
+            try {
+                CustomerDAO.insert(c);
+            } catch (SQLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else if(e.getSource().equals(this.addNewQuotationDialog.getjButtonAddNewQuotation())){
-            //this.addNewCustomerDialog;
-            //CustomerDAO.insert();
+            String date = this.addNewQuotationDialog.getjTextFieldDate().getText();
+            int price = parseInt(this.addNewQuotationDialog.getjTextFieldDate().getText());
+            int customer = this.addNewQuotationDialog.getNumberSelectedCustomer();
+            Quotation q = new Quotation(0,date,price);
+            try {
+                QuotationDAO.insert(q, customer);
+            } catch (SQLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else if(e.getSource().equals(this.addNewInvoiceDialog.getjButtonAddNewInvoice())){
-            //this.addNewCustomerDialog;
-            //CustomerDAO.insert();
+            String date = this.addNewInvoiceDialog.getjTextFieldDate().getText();
+            int price = parseInt(this.addNewInvoiceDialog.getjTextFieldDate().getText());
+            int customer = this.addNewInvoiceDialog.getNumberSelectedCustomer();
+            Invoice q = new Invoice(0,date,price);
+            try {
+                InvoiceDAO.insert(q, customer);
+            } catch (SQLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else if(e.getSource().equals(this.jComboBoxSortCustomersTable)){
             switch(modelComboBoxSortCustomersTable.getSelectedItem().toString()){
                 case "name" :
@@ -313,6 +341,12 @@ public class HomeController implements ActionListener, MouseListener {
                     break;
             }
             displayCustomersTable(false);
+        } else if(e.getSource().equals(this.addNewInvoiceDialog.getjComboBoxCustomer())){
+            Customer customer = (Customer) this.addNewInvoiceDialog.getModelComboBoxCustomers().getSelectedItem();
+            this.addNewInvoiceDialog.setNumberSelectedCustomer(customer.getNumber());
+        } else if(e.getSource().equals(this.addNewQuotationDialog.getjComboBoxCustomer())){
+            Customer customer = (Customer) this.addNewQuotationDialog.getModelComboBoxCustomers().getSelectedItem();
+            this.addNewQuotationDialog.setNumberSelectedCustomer(customer.getNumber());
         }
     }
     

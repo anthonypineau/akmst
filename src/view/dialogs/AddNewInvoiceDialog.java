@@ -5,7 +5,14 @@
  */
 package view.dialogs;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import model.dao.CustomerDAO;
+import model.work.Customer;
 
 /**
  *
@@ -13,20 +20,51 @@ import javax.swing.JButton;
  */
 public class AddNewInvoiceDialog extends javax.swing.JDialog {
 
+    private DefaultComboBoxModel modelComboBoxCustomers = new DefaultComboBoxModel();
+    private int numberSelectedCustomer;
+    
     /**
      * Creates new form AddNewInvoicesDialog
      */
-    public AddNewInvoiceDialog(java.awt.Frame parent, boolean modal) {
+    public AddNewInvoiceDialog(java.awt.Frame parent, boolean modal) throws SQLException {
         super(parent, modal);
         initComponents();
+        this.jComboBoxCustomer.setModel(modelComboBoxCustomers);
+        ArrayList<Customer> customers = CustomerDAO.getAll();
+        customers.forEach(c -> {
+            modelComboBoxCustomers.addElement(c);
+        });
+        numberSelectedCustomer=customers.get(0).getNumber();
     }
 
     public JButton getjButtonAddNewInvoice() {
         return jButtonAddNewInvoice;
     }
-    
-    
 
+    public DefaultComboBoxModel getModelComboBoxCustomers() {
+        return modelComboBoxCustomers;
+    }
+    
+    public int getNumberSelectedCustomer() {
+        return numberSelectedCustomer;
+    }
+
+    public void setNumberSelectedCustomer(int numberSelectedCustomer) {
+        this.numberSelectedCustomer = numberSelectedCustomer;
+    }
+    
+    public JComboBox<String> getjComboBoxCustomer() {
+        return jComboBoxCustomer;
+    }
+
+    public JTextField getjTextFieldDate() {
+        return jTextFieldDate;
+    }
+
+    public JTextField getjTextFieldPrice() {
+        return jTextFieldPrice;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,16 +75,28 @@ public class AddNewInvoiceDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldDate = new javax.swing.JTextField();
         jButtonAddNewInvoice = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldPrice = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBoxCustomer = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("Date :");
 
-        jTextField1.setText("jTextField1");
+        jTextFieldDate.setText("date");
 
         jButtonAddNewInvoice.setText("Add new invoice");
+
+        jLabel2.setText("Price :");
+
+        jTextFieldPrice.setText("price");
+
+        jLabel3.setText("Customer :");
+
+        jComboBoxCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -55,25 +105,41 @@ public class AddNewInvoiceDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel1)
-                        .addGap(32, 32, 32)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jComboBoxCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
+                        .addGap(25, 25, 25)
                         .addComponent(jButtonAddNewInvoice)))
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBoxCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                    .addComponent(jTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jButtonAddNewInvoice)
-                .addGap(37, 37, 37))
+                .addGap(58, 58, 58))
         );
 
         pack();
@@ -81,7 +147,11 @@ public class AddNewInvoiceDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddNewInvoice;
+    private javax.swing.JComboBox<String> jComboBoxCustomer;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField jTextFieldDate;
+    private javax.swing.JTextField jTextFieldPrice;
     // End of variables declaration//GEN-END:variables
 }

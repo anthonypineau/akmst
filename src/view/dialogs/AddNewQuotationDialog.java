@@ -5,7 +5,14 @@
  */
 package view.dialogs;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import model.dao.CustomerDAO;
+import model.work.Customer;
 
 /**
  *
@@ -13,16 +20,49 @@ import javax.swing.JButton;
  */
 public class AddNewQuotationDialog extends javax.swing.JDialog {
 
+    private DefaultComboBoxModel modelComboBoxCustomers = new DefaultComboBoxModel();
+    private int numberSelectedCustomer;
+    
     /**
      * Creates new form AddNewQuotationDialog
      */
-    public AddNewQuotationDialog(java.awt.Frame parent, boolean modal) {
+    public AddNewQuotationDialog(java.awt.Frame parent, boolean modal) throws SQLException {
         super(parent, modal);
         initComponents();
+        this.jComboBoxCustomer.setModel(modelComboBoxCustomers);
+        ArrayList<Customer> customers = CustomerDAO.getAll();
+        customers.forEach(c -> {
+            modelComboBoxCustomers.addElement(c);
+        });
+        numberSelectedCustomer=customers.get(0).getNumber();
     }
 
+    public int getNumberSelectedCustomer() {
+        return numberSelectedCustomer;
+    }
+
+    public void setNumberSelectedCustomer(int numberSelectedCustomer) {
+        this.numberSelectedCustomer = numberSelectedCustomer;
+    }
+
+    public DefaultComboBoxModel getModelComboBoxCustomers() {
+        return modelComboBoxCustomers;
+    }
+    
     public JButton getjButtonAddNewQuotation() {
         return jButtonAddNewQuotation;
+    }
+
+    public JComboBox<String> getjComboBoxCustomer() {
+        return jComboBoxCustomer;
+    }
+
+    public JTextField getjTextFieldDate() {
+        return jTextFieldDate;
+    }
+
+    public JTextField getjTextFieldPrice() {
+        return jTextFieldPrice;
     }
 
     
@@ -37,26 +77,69 @@ public class AddNewQuotationDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jButtonAddNewQuotation = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBoxCustomer = new javax.swing.JComboBox<>();
+        jTextFieldDate = new javax.swing.JTextField();
+        jTextFieldPrice = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButtonAddNewQuotation.setText("Add new quotation");
+
+        jLabel1.setText("Customer :");
+
+        jLabel2.setText("Date :");
+
+        jLabel3.setText("Price :");
+
+        jComboBoxCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jTextFieldDate.setText("date");
+
+        jTextFieldPrice.setText("price");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addComponent(jButtonAddNewQuotation)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBoxCustomer, 0, 100, Short.MAX_VALUE)
+                            .addComponent(jTextFieldDate)
+                            .addComponent(jTextFieldPrice)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jButtonAddNewQuotation)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(249, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBoxCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jButtonAddNewQuotation)
-                .addGap(28, 28, 28))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -64,5 +147,11 @@ public class AddNewQuotationDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddNewQuotation;
+    private javax.swing.JComboBox<String> jComboBoxCustomer;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField jTextFieldDate;
+    private javax.swing.JTextField jTextFieldPrice;
     // End of variables declaration//GEN-END:variables
 }

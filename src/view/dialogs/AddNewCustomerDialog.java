@@ -6,6 +6,7 @@
 package view.dialogs;
 
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 /**
  *
@@ -24,6 +25,28 @@ public class AddNewCustomerDialog extends javax.swing.JDialog {
     public JButton getjButtonAddNewCustomer() {
         return jButtonAddNewCustomer;
     }
+
+    public JTextField getjTextFieldDate() {
+        return jTextFieldDate;
+    }
+
+    public JTextField getjTextFieldEmail() {
+        return jTextFieldEmail;
+    }
+
+    public JTextField getjTextFieldName() {
+        return jTextFieldName;
+    }
+
+    public JTextField getjTextFieldPhone() {
+        return jTextFieldPhone;
+    }
+
+    public JTextField getjTextFieldTag() {
+        return jTextFieldTag;
+    }
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.

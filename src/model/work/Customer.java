@@ -6,8 +6,6 @@
 package model.work;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
 import model.work.Invoice;
 import model.work.Quotation;
 
@@ -23,8 +21,8 @@ public class Customer {
     private String firstOrderDate;
     private String tag;
     
-    private ArrayList<Invoice> invoices = new ArrayList<Invoice>();
-    private ArrayList<Quotation> quotations = new ArrayList<Quotation>();
+    private ArrayList<Invoice> invoices = new ArrayList<>();
+    private ArrayList<Quotation> quotations = new ArrayList<>();
     
     public Customer(int number, String name, String email, String phoneNumber, String firstOrderDate, String tag){
         this.number = number;
@@ -35,8 +33,11 @@ public class Customer {
         this.tag = tag;
     }
     
+    public String toString(){
+        return this.name;
+    }
+    
     // getters and setters
-
     public int getNumber() {
         return number;
     }
