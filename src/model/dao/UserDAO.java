@@ -21,7 +21,7 @@ public class UserDAO {
     public static User getOneById(int id) throws SQLException {
         User oneUser = null;
         Connection cnx = Jdbc.connect();
-        String requete = "SELECT id, name, status, email FROM user WHERE id = ?";
+        String requete = "SELECT id, name, status, email FROM users WHERE id = ?";
         PreparedStatement pstmt = cnx.prepareStatement(requete);
         pstmt.setInt(1, id);
         ResultSet rs = pstmt.executeQuery();
@@ -38,7 +38,7 @@ public class UserDAO {
     public static int getIdByEmail(String email) throws SQLException {
         int id = 0;
         Connection cnx = Jdbc.connect();
-        String requete = "SELECT id FROM user WHERE email = ?";
+        String requete = "SELECT id FROM users WHERE email = ?";
         PreparedStatement pstmt = cnx.prepareStatement(requete);
         pstmt.setString(1, email);
         ResultSet rs = pstmt.executeQuery();
@@ -51,7 +51,7 @@ public class UserDAO {
     public static int verifiedUser(String email, String password) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
         Connection cnx = Jdbc.connect();
         int id = -1;
-        String requete = "SELECT password FROM user WHERE email = ?";
+        String requete = "SELECT password FROM users WHERE email = ?";
         PreparedStatement pstmt = cnx.prepareStatement(requete);
         pstmt.setString(1, email);
         ResultSet rs = pstmt.executeQuery();
@@ -69,7 +69,7 @@ public class UserDAO {
         Connection cnx = Jdbc.connect();
         String requete;
         PreparedStatement pstmt;
-        requete = "INSERT INTO user (name, status, email, password) VALUES (?, ?, ?, ?)";
+        requete = "INSERT INTO users (name, status, email, password) VALUES (?, ?, ?, ?)";
         pstmt = cnx.prepareStatement(requete);
         pstmt.setString(1, oneUser.getName());
         pstmt.setString(2, oneUser.getStatus());
@@ -84,7 +84,7 @@ public class UserDAO {
         Connection cnx = Jdbc.connect();
         String requete;
         PreparedStatement pstmt;
-        requete = "UPDATE user SET name = ? , status = ? , email = ? WHERE id = ?";
+        requete = "UPDATE users SET name = ? , status = ? , email = ? WHERE id = ?";
         pstmt = cnx.prepareStatement(requete);
         pstmt.setString(1, oneUser.getName());
         pstmt.setString(2, oneUser.getStatus());
@@ -99,7 +99,7 @@ public class UserDAO {
         Connection cnx = Jdbc.connect();
         String requete;
         PreparedStatement pstmt;
-        requete = "UPDATE user SET password = ? WHERE id = ?";
+        requete = "UPDATE users SET password = ? WHERE id = ?";
         pstmt = cnx.prepareStatement(requete);
         pstmt.setString(1, password);
         pstmt.setInt(2, idUser);
@@ -112,7 +112,7 @@ public class UserDAO {
         Connection cnx = Jdbc.connect();
         String requete;
         PreparedStatement pstmt;
-        requete = "DELETE FROM user WHERE id = ?";
+        requete = "DELETE FROM users WHERE id = ?";
         pstmt = cnx.prepareStatement(requete);
         pstmt.setInt(1, idUser);
         nb = pstmt.executeUpdate();

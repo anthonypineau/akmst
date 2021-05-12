@@ -17,7 +17,7 @@ public class Akmst {
      */
     public static void main(String[] args) {
         MainController mainController = new MainController();
-        //mainController.displayLoginView();
-        mainController.displayHomeView(new User(1, "anthony", "admin", "anthony"));
+        mainController.displayLoginView();
+        //mainController.displayHomeView(new User(1, "anthony", "admin", "anthony"));
     }
 }

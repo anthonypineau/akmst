@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -43,7 +37,7 @@ import view.dialogs.AddNewQuotationDialog;
 
 /**
  *
- * @author anthony
+ * @author Anthony
  */
 public class HomeController implements ActionListener, MouseListener {
 
@@ -63,6 +57,10 @@ public class HomeController implements ActionListener, MouseListener {
     private ArrayList<Customer> customers = new ArrayList<>();
     private ArrayList<Invoice> invoices = new ArrayList<>();
     private ArrayList<Quotation> quotations = new ArrayList<>();
+    
+    private String[] customersTableColumnTitles = {"Customer number", "Name", "E-mail", "Phone number", "First order date", "Tag"};
+    private String[] invoicesTableColumnsTitles = {"Invoice number", "Ordre date", "Total price"};
+    private String[] quotationsTableColumnsTitles = {"Quotation number", "Ordre date", "Price"};
     
     private Customer selectedCustomer = null;
             
@@ -86,7 +84,7 @@ public class HomeController implements ActionListener, MouseListener {
         jButtonQuotations = new JButton("Quotations");
         jButtonInvoices = new JButton("Invoices");
         jButtonAdd = new JButton("Add");
-                
+        
         this.jButtonHome.addActionListener(this);
         this.jButtonCustomers.addActionListener(this);
         this.jButtonQuotations.addActionListener(this);
@@ -145,63 +143,28 @@ public class HomeController implements ActionListener, MouseListener {
         panel.add(Graphs.displayPieGraph());
         panel.add(Graphs.displayLineGraph());
         panel.add(Graphs.displayLaGraph());
-        this.homeView.getjPanelContent().removeAll();
-        this.homeView.getjPanelContent().add(panel);
-        this.homeView.getjPanelContent().validate();
+        //this.homeView.getjPanelContent().removeAll();
+        //this.homeView.getjPanelContent().add(panel);
+        //this.homeView.getjPanelContent().validate();
+        this.displayJContentPanel(panel);
     }
     
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(this.jButtonCustomers)){
-            displayCustomersTable(false);
-            this.jButtonAdd.setText("Add new customer");
-            statusAddButton=1;
-            this.jButtonAdd.setVisible(true);
-        }else if(e.getSource().equals(this.jButtonHome)){
-            displayHome();
-            this.jButtonAdd.setVisible(false);
-        }else if(e.getSource().equals(this.jButtonAdd)){
-            switch(statusAddButton){
-                case 1:
-                    this.addNewCustomerDialog.setVisible(true);
-                    break;
-                case 2:
-                    this.addNewQuotationDialog.setVisible(true);
-                    break;
-                case 3:
-                    this.addNewInvoiceDialog.setVisible(true);
-                    break;
-            }
-        }else if(e.getSource().equals(this.jButtonQuotations)){
-            displayQuotationsTable();
-            this.jButtonAdd.setText("Add new quotation");
-            statusAddButton=2;
-            this.jButtonAdd.setVisible(true);
-        }else if(e.getSource().equals(this.jButtonInvoices)){
-            displayInvoicesTable();
-            this.jButtonAdd.setText("Add new invoice");
-            statusAddButton=3;
-            this.jButtonAdd.setVisible(true);
-        }else if(e.getSource().equals(this.addNewCustomerDialog.getjButtonAddNewCustomer())){
-            
-        }else if(e.getSource().equals(this.jComboBoxSortCustomersTable)){
-            switch(modelComboBoxSortCustomersTable.getSelectedItem().toString()){
-                case "name" :
-                    customers.sort(new NameSorter());
-                    break;
-                case "name desc" :
-                    customers.sort(new NameDescSorter());
-                    break;
-            }
-            displayCustomersTable(true);
-        }
+    private void updateCustomers() throws SQLException{
+        this.customers = CustomerDAO.getAll();
     }
-
+    
+    private void updateInvoices() throws SQLException{
+        this.invoices = InvoiceDAO.getAll();
+    }
+    
+    private void updateQuotations() throws SQLException{
+        this.quotations = QuotationDAO.getAll();
+    }
+    
     private void displayCustomersTable(boolean status){
         selectedCustomer=null;
-        String[] columnsTitles = {"Customer number", "Name", "E-mail", "Phone number", "First order date", "Tag"};
         
-        modelTableCustomers.setColumnIdentifiers(columnsTitles);    
+        modelTableCustomers.setColumnIdentifiers(customersTableColumnTitles);    
         
         for(int i=this.modelTableCustomers.getRowCount()-1;i>=0;i--){
             this.modelTableCustomers.removeRow(i);
@@ -227,16 +190,11 @@ public class HomeController implements ActionListener, MouseListener {
             c.gridwidth = 2;
             customerPanel.add(new JScrollPane(jTableCustomers),c);
         }
-        
-        this.homeView.getjPanelContent().removeAll();
-        this.homeView.getjPanelContent().add(customerPanel);
-        this.homeView.getjPanelContent().repaint();
+        this.displayJContentPanel(customerPanel);
     }
     
-    private void displayInvoicesTable(){
-        String[] columnsTitles = {"Invoice number", "Ordre date", "Total price"};
-        
-        modelTable.setColumnIdentifiers(columnsTitles);
+    private void displayInvoicesTable(){       
+        modelTable.setColumnIdentifiers(invoicesTableColumnsTitles);
         
         ArrayList<Invoice> invoicesDisplay;
         
@@ -254,15 +212,11 @@ public class HomeController implements ActionListener, MouseListener {
             modelTable.addRow(ModelToTable.invoiceToTableRow(i));
         });
         
-        this.homeView.getjPanelContent().removeAll();
-        this.homeView.getjPanelContent().add(new JScrollPane(jTable));
-        this.homeView.getjPanelContent().repaint();
+        this.displayJContentPanel(new JScrollPane(jTable));
     }
     
     private void displayQuotationsTable(){
-        String[] columnsTitles = {"Invoice number", "Ordre date", "Price"};
-        
-        modelTable.setColumnIdentifiers(columnsTitles);
+        modelTable.setColumnIdentifiers(quotationsTableColumnsTitles);
         
         ArrayList<Quotation> quotationsDisplay;
         
@@ -280,13 +234,86 @@ public class HomeController implements ActionListener, MouseListener {
             modelTable.addRow(ModelToTable.quotationToTableRow(q));
         });
         
-        this.homeView.getjPanelContent().removeAll();
-        this.homeView.getjPanelContent().add(new JScrollPane(jTable));
-        this.homeView.getjPanelContent().repaint();
+        this.displayJContentPanel(new JScrollPane(jTable));
     }
     
-    private void displayJPanelContent(Component component){
-        
+    private void displayJContentPanel(Component component){
+        this.homeView.getjPanelContent().removeAll();
+        this.homeView.getjPanelContent().add(component);
+        this.homeView.getjPanelContent().validate();
+    }
+    
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource().equals(this.jButtonCustomers)){
+            displayCustomersTable(false);
+            this.jButtonAdd.setText("Add new customer");
+            statusAddButton=1;
+            this.jButtonAdd.setVisible(true);
+        }else if(e.getSource().equals(this.jButtonQuotations)){
+            displayQuotationsTable();
+            this.jButtonAdd.setText("Add new quotation");
+            statusAddButton=2;
+            this.jButtonAdd.setVisible(true);
+        }else if(e.getSource().equals(this.jButtonInvoices)){
+            displayInvoicesTable();
+            this.jButtonAdd.setText("Add new invoice");
+            statusAddButton=3;
+            this.jButtonAdd.setVisible(true);
+        }else if(e.getSource().equals(this.jButtonHome)){
+            displayHome();
+            this.jButtonAdd.setVisible(false);
+        }else if(e.getSource().equals(this.jButtonAdd)){
+            switch(statusAddButton){
+                case 1:
+                    this.addNewCustomerDialog.setVisible(true);
+                    try {
+                        updateCustomers();
+                        displayCustomersTable(false);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                case 2:
+                    this.addNewQuotationDialog.setVisible(true);
+                    try {
+                        updateQuotations();
+                        displayQuotationsTable();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                case 3:
+                    this.addNewInvoiceDialog.setVisible(true);
+                    try {
+                        updateInvoices();
+                        displayInvoicesTable();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+            }
+        }else if(e.getSource().equals(this.addNewCustomerDialog.getjButtonAddNewCustomer())){
+            //this.addNewCustomerDialog;
+            //CustomerDAO.insert();
+        }else if(e.getSource().equals(this.addNewQuotationDialog.getjButtonAddNewQuotation())){
+            //this.addNewCustomerDialog;
+            //CustomerDAO.insert();
+        }else if(e.getSource().equals(this.addNewInvoiceDialog.getjButtonAddNewInvoice())){
+            //this.addNewCustomerDialog;
+            //CustomerDAO.insert();
+        }else if(e.getSource().equals(this.jComboBoxSortCustomersTable)){
+            switch(modelComboBoxSortCustomersTable.getSelectedItem().toString()){
+                case "name" :
+                    customers.sort(new NameSorter());
+                    break;
+                case "name desc" :
+                    customers.sort(new NameDescSorter());
+                    break;
+            }
+            displayCustomersTable(false);
+        }
     }
     
     @Override

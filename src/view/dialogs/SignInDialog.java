@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package view.dialogs;
 
 import java.awt.Color;
 import javax.swing.JButton;
@@ -14,40 +14,30 @@ import javax.swing.JTextField;
  *
  * @author Anthony
  */
-public class SignUpDialog extends javax.swing.JDialog {
+public class SignInDialog extends javax.swing.JDialog {
 
     /**
-     * Creates new form SignUpDialog
-     * @param parent
-     * @param modal
+     * Creates new form SignInDialog
      */
-    public SignUpDialog(java.awt.Frame parent, boolean modal) {
+    public SignInDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.getContentPane().setBackground(Color.WHITE);
         setLocationRelativeTo(null);
     }
-    
+
     public JTextField getJTextFieldEmail(){
         return this.jTextFieldEmail;
-    }
-    
-    public JTextField getJTextFieldName(){
-        return this.jTextFieldName;
     }
     
     public JPasswordField getJPasswordField(){
         return this.jPasswordField;
     }
-
-    public JTextField getJTextFieldStatus(){
-        return this.jTextFieldStatus;
+    
+    public JButton getJButtonSignIn(){
+        return this.jButtonSignIn;
     }
     
-    public JButton getJButtonSignUp(){
-        return this.jButtonSignUp;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,15 +47,10 @@ public class SignUpDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabelLogo = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
-        jTextFieldName = new javax.swing.JTextField();
-        jTextFieldStatus = new javax.swing.JTextField();
-        jButtonSignUp = new javax.swing.JButton();
+        jButtonSignIn = new javax.swing.JButton();
         jPasswordField = new javax.swing.JPasswordField();
-
-        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -82,31 +67,9 @@ public class SignUpDialog extends javax.swing.JDialog {
             }
         });
 
-        jTextFieldName.setForeground(new java.awt.Color(116, 147, 191));
-        jTextFieldName.setText("Name");
-        jTextFieldName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextFieldNameFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextFieldNameFocusLost(evt);
-            }
-        });
-
-        jTextFieldStatus.setForeground(new java.awt.Color(116, 147, 191));
-        jTextFieldStatus.setText("Status");
-        jTextFieldStatus.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextFieldStatusFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextFieldStatusFocusLost(evt);
-            }
-        });
-
-        jButtonSignUp.setBackground(new java.awt.Color(116, 147, 191));
-        jButtonSignUp.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonSignUp.setText("Sign UP");
+        jButtonSignIn.setBackground(new java.awt.Color(116, 147, 191));
+        jButtonSignIn.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonSignIn.setText("Sign In");
 
         jPasswordField.setText("password");
         jPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -128,12 +91,10 @@ public class SignUpDialog extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(jLabelLogo))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonSignUp, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addGap(155, 155, 155)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jTextFieldEmail)
-                            .addComponent(jTextFieldName)
-                            .addComponent(jTextFieldStatus)
+                            .addComponent(jButtonSignIn, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                             .addComponent(jPasswordField))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -142,17 +103,13 @@ public class SignUpDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelLogo)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jButtonSignUp)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonSignIn)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -168,26 +125,6 @@ public class SignUpDialog extends javax.swing.JDialog {
             this.getJTextFieldEmail().setText("Email");
     }//GEN-LAST:event_jTextFieldEmailFocusLost
 
-    private void jTextFieldNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNameFocusGained
-        if(this.getJTextFieldName().getText().equals("Name"))
-            this.getJTextFieldName().setText("");
-    }//GEN-LAST:event_jTextFieldNameFocusGained
-
-    private void jTextFieldNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldNameFocusLost
-        if(this.getJTextFieldName().getText().trim().equals(""))
-            this.getJTextFieldName().setText("Name");
-    }//GEN-LAST:event_jTextFieldNameFocusLost
-
-    private void jTextFieldStatusFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldStatusFocusGained
-        if(this.getJTextFieldStatus().getText().equals("Status"))
-            this.getJTextFieldStatus().setText("");
-    }//GEN-LAST:event_jTextFieldStatusFocusGained
-
-    private void jTextFieldStatusFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldStatusFocusLost
-        if(this.getJTextFieldStatus().getText().trim().equals(""))
-            this.getJTextFieldStatus().setText("Status");
-    }//GEN-LAST:event_jTextFieldStatusFocusLost
-
     private void jPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordFieldFocusGained
         if(this.getJPasswordField().getText().equals("password"))
             this.getJPasswordField().setText("");
@@ -199,12 +136,9 @@ public class SignUpDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jPasswordFieldFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonSignUp;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButtonSignIn;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldName;
-    private javax.swing.JTextField jTextFieldStatus;
     // End of variables declaration//GEN-END:variables
 }

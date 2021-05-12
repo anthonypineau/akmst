@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
 import model.dao.UserDAO;
 import model.work.User;
 import view.LoginView;
-import view.SignInDialog;
-import view.SignUpDialog;
+import view.dialogs.SignInDialog;
+import view.dialogs.SignUpDialog;
 
 /**
  *
- * @author anthony
+ * @author Anthony
  */
 public class LoginController implements ActionListener {
     
@@ -48,7 +48,6 @@ public class LoginController implements ActionListener {
     }
     
     public void undisplayLoginView(){
-        //this.loginView.setVisible(false);
         this.loginView.dispose();
     }
 
@@ -66,9 +65,7 @@ public class LoginController implements ActionListener {
                 this.mainController.displayHomeView(user);
             }catch(SQLException e){
                 System.out.print(e.getMessage());
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnsupportedEncodingException ex) {
+            } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else if(event.getSource().equals(this.signUpDialog.getJButtonSignUp())){
@@ -84,9 +81,7 @@ public class LoginController implements ActionListener {
                 }
             }catch(SQLException e){
                 System.out.print(e.getMessage());
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnsupportedEncodingException ex) {
+            } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
