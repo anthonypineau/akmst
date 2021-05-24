@@ -64,7 +64,7 @@ public class HomeController implements ActionListener, MouseListener {
     private String[] quotationsTableColumnsTitles = {"Quotation number", "Ordre date", "Price"};
     
     private Customer selectedCustomer = null;
-            
+    
     private JComboBox jComboBoxSortCustomersTable = new JComboBox();
     private DefaultComboBoxModel modelComboBoxSortCustomersTable = new DefaultComboBoxModel();
         
@@ -80,11 +80,11 @@ public class HomeController implements ActionListener, MouseListener {
         this.mainController = mainController;
         this.homeView = new HomeView();
         
-        jButtonHome = new JButton("Home");
-        jButtonCustomers = new JButton("Customers");
-        jButtonQuotations = new JButton("Quotations");
-        jButtonInvoices = new JButton("Invoices");
-        jButtonAdd = new JButton("Add");
+        this.jButtonHome = new JButton("Home");
+        this.jButtonCustomers = new JButton("Customers");
+        this.jButtonQuotations = new JButton("Quotations");
+        this.jButtonInvoices = new JButton("Invoices");
+        this.jButtonAdd = new JButton("Add");
         
         this.jButtonHome.addActionListener(this);
         this.jButtonCustomers.addActionListener(this);
@@ -111,20 +111,20 @@ public class HomeController implements ActionListener, MouseListener {
         this.addNewInvoiceDialog.getjComboBoxCustomer().addActionListener(this);
         this.addNewQuotationDialog.getjComboBoxCustomer().addActionListener(this);
         
-        jComboBoxSortCustomersTable.setModel(modelComboBoxSortCustomersTable);
+        this.jComboBoxSortCustomersTable.setModel(modelComboBoxSortCustomersTable);
                 
         String[] items = { "name", "name desc" };
         
         for(String item : items){
-            modelComboBoxSortCustomersTable.addElement(item);
+            this.modelComboBoxSortCustomersTable.addElement(item);
         }
         
-        jComboBoxSortCustomersTable.addActionListener(this);
+        this.jComboBoxSortCustomersTable.addActionListener(this);
         
-        jTable.setModel(modelTable);
-        jTableCustomers.setModel(modelTableCustomers);
+        this.jTable.setModel(this.modelTable);
+        this.jTableCustomers.setModel(this.modelTableCustomers);
         
-        jTableCustomers.addMouseListener(this);
+        this.jTableCustomers.addMouseListener(this);
         
         try {
             this.customers = CustomerDAO.getAll();
@@ -168,16 +168,16 @@ public class HomeController implements ActionListener, MouseListener {
     }
     
     private void displayCustomersTable(boolean status){
-        selectedCustomer=null;
+        this.selectedCustomer=null;
         
-        modelTableCustomers.setColumnIdentifiers(customersTableColumnTitles);    
+        this.modelTableCustomers.setColumnIdentifiers(this.customersTableColumnTitles);    
         
         for(int i=this.modelTableCustomers.getRowCount()-1;i>=0;i--){
             this.modelTableCustomers.removeRow(i);
         }
         
-        customers.forEach(c -> {
-            modelTableCustomers.addRow(ModelToTable.customerToTableRow(c));
+        this.customers.forEach(c -> {
+            this.modelTableCustomers.addRow(ModelToTable.customerToTableRow(c));
         });
         JPanel customerPanel = new JPanel();
         if(!status){
@@ -190,24 +190,24 @@ public class HomeController implements ActionListener, MouseListener {
             customerPanel.add(new JLabel("Sort by :"), c);
             c.gridx = 1;
             c.gridy = 0;
-            customerPanel.add(jComboBoxSortCustomersTable,c);
+            customerPanel.add(this.jComboBoxSortCustomersTable,c);
             c.gridx = 0;
             c.gridy = 1;
             c.gridwidth = 2;
-            customerPanel.add(new JScrollPane(jTableCustomers),c);
+            customerPanel.add(new JScrollPane(this.jTableCustomers),c);
         }
         this.displayJContentPanel(customerPanel);
     }
     
     private void displayInvoicesTable(){       
-        modelTable.setColumnIdentifiers(invoicesTableColumnsTitles);
+        this.modelTable.setColumnIdentifiers(this.invoicesTableColumnsTitles);
         
         ArrayList<Invoice> invoicesDisplay;
         
-        if(selectedCustomer != null){
-            invoicesDisplay = selectedCustomer.getInvoices();
+        if(this.selectedCustomer != null){
+            invoicesDisplay = this.selectedCustomer.getInvoices();
         }else{
-            invoicesDisplay = invoices;
+            invoicesDisplay = this.invoices;
         }
         
         for(int i=this.modelTable.getRowCount()-1;i>=0;i--){
@@ -215,21 +215,21 @@ public class HomeController implements ActionListener, MouseListener {
         }
         
         invoicesDisplay.forEach(i -> {
-            modelTable.addRow(ModelToTable.invoiceToTableRow(i));
+            this.modelTable.addRow(ModelToTable.invoiceToTableRow(i));
         });
         
         this.displayJContentPanel(new JScrollPane(jTable));
     }
     
     private void displayQuotationsTable(){
-        modelTable.setColumnIdentifiers(quotationsTableColumnsTitles);
+        this.modelTable.setColumnIdentifiers(this.quotationsTableColumnsTitles);
         
         ArrayList<Quotation> quotationsDisplay;
         
-        if(selectedCustomer != null){
-            quotationsDisplay = selectedCustomer.getQuotations();
+        if(this.selectedCustomer != null){
+            quotationsDisplay = this.selectedCustomer.getQuotations();
         }else{
-            quotationsDisplay = quotations;
+            quotationsDisplay = this.quotations;
         }
         
         for(int i=this.modelTable.getRowCount()-1;i>=0;i--){
@@ -237,7 +237,7 @@ public class HomeController implements ActionListener, MouseListener {
         }
         
         quotationsDisplay.forEach(q -> {
-            modelTable.addRow(ModelToTable.quotationToTableRow(q));
+            this.modelTable.addRow(ModelToTable.quotationToTableRow(q));
         });
         
         this.displayJContentPanel(new JScrollPane(jTable));
@@ -254,23 +254,23 @@ public class HomeController implements ActionListener, MouseListener {
         if(e.getSource().equals(this.jButtonCustomers)){
             displayCustomersTable(false);
             this.jButtonAdd.setText("Add new customer");
-            statusAddButton=1;
+            this.statusAddButton=1;
             this.jButtonAdd.setVisible(true);
         }else if(e.getSource().equals(this.jButtonQuotations)){
             displayQuotationsTable();
             this.jButtonAdd.setText("Add new quotation");
-            statusAddButton=2;
+            this.statusAddButton=2;
             this.jButtonAdd.setVisible(true);
         }else if(e.getSource().equals(this.jButtonInvoices)){
             displayInvoicesTable();
             this.jButtonAdd.setText("Add new invoice");
-            statusAddButton=3;
+            this.statusAddButton=3;
             this.jButtonAdd.setVisible(true);
         }else if(e.getSource().equals(this.jButtonHome)){
             displayHome();
             this.jButtonAdd.setVisible(false);
         }else if(e.getSource().equals(this.jButtonAdd)){
-            switch(statusAddButton){
+            switch(this.statusAddButton){
                 case 1:
                     this.addNewCustomerDialog.setVisible(true);
                     try {
@@ -313,7 +313,7 @@ public class HomeController implements ActionListener, MouseListener {
             }
         }else if(e.getSource().equals(this.addNewQuotationDialog.getjButtonAddNewQuotation())){
             String date = this.addNewQuotationDialog.getjTextFieldDate().getText();
-            int price = parseInt(this.addNewQuotationDialog.getjTextFieldDate().getText());
+            int price = parseInt(this.addNewQuotationDialog.getjTextFieldPrice().getText());
             int customer = this.addNewQuotationDialog.getNumberSelectedCustomer();
             Quotation q = new Quotation(0,date,price);
             try {
@@ -323,7 +323,7 @@ public class HomeController implements ActionListener, MouseListener {
             }
         }else if(e.getSource().equals(this.addNewInvoiceDialog.getjButtonAddNewInvoice())){
             String date = this.addNewInvoiceDialog.getjTextFieldDate().getText();
-            int price = parseInt(this.addNewInvoiceDialog.getjTextFieldDate().getText());
+            int price = parseInt(this.addNewInvoiceDialog.getjTextFieldPrice().getText());
             int customer = this.addNewInvoiceDialog.getNumberSelectedCustomer();
             Invoice q = new Invoice(0,date,price);
             try {
@@ -332,12 +332,12 @@ public class HomeController implements ActionListener, MouseListener {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else if(e.getSource().equals(this.jComboBoxSortCustomersTable)){
-            switch(modelComboBoxSortCustomersTable.getSelectedItem().toString()){
+            switch(this.modelComboBoxSortCustomersTable.getSelectedItem().toString()){
                 case "name" :
-                    customers.sort(new NameSorter());
+                    this.customers.sort(new NameSorter());
                     break;
                 case "name desc" :
-                    customers.sort(new NameDescSorter());
+                    this.customers.sort(new NameDescSorter());
                     break;
             }
             displayCustomersTable(false);
@@ -352,29 +352,29 @@ public class HomeController implements ActionListener, MouseListener {
     
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getSource().equals(jTableCustomers)) {
-            selectedCustomer = customers.get(jTableCustomers.rowAtPoint(e.getPoint()));
+        if (e.getSource().equals(this.jTableCustomers)) {
+            this.selectedCustomer = this.customers.get(this.jTableCustomers.rowAtPoint(e.getPoint()));
         }
     }
-
+    
     @Override
     public void mousePressed(MouseEvent e) {
         
     }
-
+    
     @Override
     public void mouseReleased(MouseEvent e) {
         
     }
-
+    
     @Override
     public void mouseEntered(MouseEvent e) {
         
     }
-
+    
     @Override
     public void mouseExited(MouseEvent e) {
         
     }
-     
+    
 }
