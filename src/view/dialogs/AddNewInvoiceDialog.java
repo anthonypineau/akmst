@@ -36,6 +36,16 @@ public class AddNewInvoiceDialog extends javax.swing.JDialog {
         });
         numberSelectedCustomer=customers.get(0).getNumber();
     }
+    
+    public void UpdateComboBox() throws SQLException{
+        for(int i=this.modelComboBoxCustomers.getSize()-1;i>=0;i--){
+            this.modelComboBoxCustomers.removeElementAt(i);
+        }
+        ArrayList<Customer> customers = CustomerDAO.getAll();
+        customers.forEach(c -> {
+            modelComboBoxCustomers.addElement(c);
+        });
+    }
 
     public JButton getjButtonAddNewInvoice() {
         return jButtonAddNewInvoice;

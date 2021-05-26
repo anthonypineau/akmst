@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.sql.SQLException;
 import model.work.User;
 
 /**
@@ -16,7 +17,7 @@ public class MainController {
     private LoginController loginController = null;
     private HomeController homeController = null;
     
-    public MainController(){
+    public MainController() throws SQLException{
         this.loginController = new LoginController(this);
         this.homeController = new HomeController(this);
     }

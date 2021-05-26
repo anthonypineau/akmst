@@ -100,9 +100,9 @@ public class HomeController implements ActionListener, MouseListener {
         this.homeView.getjPanelMenu().add(jButtonInvoices);
         this.homeView.getjPanelMenu().add(jButtonAdd);        
         
-        this.addNewCustomerDialog = new AddNewCustomerDialog(this.homeView,true);
-        this.addNewInvoiceDialog = new AddNewInvoiceDialog(this.homeView,true);
-        this.addNewQuotationDialog = new AddNewQuotationDialog(this.homeView,true);       
+        this.addNewCustomerDialog = new AddNewCustomerDialog(this.homeView, true);
+        this.addNewInvoiceDialog = new AddNewInvoiceDialog(this.homeView, true);
+        this.addNewQuotationDialog = new AddNewQuotationDialog(this.homeView, true);
         
         this.addNewCustomerDialog.getjButtonAddNewCustomer().addActionListener(this);
         this.addNewInvoiceDialog.getjButtonAddNewInvoice().addActionListener(this);
@@ -281,6 +281,11 @@ public class HomeController implements ActionListener, MouseListener {
                     }
                     break;
                 case 2:
+                    try {
+                        this.addNewQuotationDialog.UpdateComboBox();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     this.addNewQuotationDialog.setVisible(true);
                     try {
                         updateQuotations();
@@ -289,7 +294,13 @@ public class HomeController implements ActionListener, MouseListener {
                         Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
+
                 case 3:
+                    try {
+                        this.addNewInvoiceDialog.UpdateComboBox();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     this.addNewInvoiceDialog.setVisible(true);
                     try {
                         updateInvoices();
@@ -311,6 +322,7 @@ public class HomeController implements ActionListener, MouseListener {
             } catch (SQLException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            this.addNewCustomerDialog.dispose();
         }else if(e.getSource().equals(this.addNewQuotationDialog.getjButtonAddNewQuotation())){
             String date = this.addNewQuotationDialog.getjTextFieldDate().getText();
             int price = parseInt(this.addNewQuotationDialog.getjTextFieldPrice().getText());
@@ -321,6 +333,7 @@ public class HomeController implements ActionListener, MouseListener {
             } catch (SQLException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            this.addNewQuotationDialog.dispose();
         }else if(e.getSource().equals(this.addNewInvoiceDialog.getjButtonAddNewInvoice())){
             String date = this.addNewInvoiceDialog.getjTextFieldDate().getText();
             int price = parseInt(this.addNewInvoiceDialog.getjTextFieldPrice().getText());
@@ -331,6 +344,7 @@ public class HomeController implements ActionListener, MouseListener {
             } catch (SQLException ex) {
                 Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            this.addNewInvoiceDialog.dispose();
         }else if(e.getSource().equals(this.jComboBoxSortCustomersTable)){
             switch(this.modelComboBoxSortCustomersTable.getSelectedItem().toString()){
                 case "name" :
@@ -343,10 +357,18 @@ public class HomeController implements ActionListener, MouseListener {
             displayCustomersTable(false);
         } else if(e.getSource().equals(this.addNewInvoiceDialog.getjComboBoxCustomer())){
             Customer customer = (Customer) this.addNewInvoiceDialog.getModelComboBoxCustomers().getSelectedItem();
-            this.addNewInvoiceDialog.setNumberSelectedCustomer(customer.getNumber());
+            try{
+                this.addNewInvoiceDialog.setNumberSelectedCustomer(customer.getNumber());   
+            }catch(NullPointerException ex){
+                
+            }
         } else if(e.getSource().equals(this.addNewQuotationDialog.getjComboBoxCustomer())){
             Customer customer = (Customer) this.addNewQuotationDialog.getModelComboBoxCustomers().getSelectedItem();
-            this.addNewQuotationDialog.setNumberSelectedCustomer(customer.getNumber());
+            try{
+                this.addNewQuotationDialog.setNumberSelectedCustomer(customer.getNumber());   
+            }catch(NullPointerException ex){
+                
+            }
         }
     }
     
