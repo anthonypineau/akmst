@@ -37,7 +37,7 @@ import view.dialogs.AddNewInvoiceDialog;
 import view.dialogs.AddNewQuotationDialog;
 
 /**
- *
+ * I need to commit
  * @author Anthony
  */
 public class HomeController implements ActionListener, MouseListener {
